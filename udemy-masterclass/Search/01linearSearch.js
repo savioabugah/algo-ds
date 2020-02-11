@@ -2,9 +2,9 @@
 
 function linearSearch(arr, value) {
     for (let i = 0; i < arr.length; i++) {
-        if (value === arr[i]) {
-            return i
-        }
+        if (value === arr[i]) return i
     }
     return -1;
 }
+
+linearSearch([34, 56,78, 10], 56) // 1

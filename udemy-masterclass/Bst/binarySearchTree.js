@@ -24,18 +24,19 @@ class BST {
             if (!currentNode.right) {
                 currentNode.right = node;
             } else {
-                this.insert(val, currentNode.right)
+                return this.insert(val, currentNode.right)
             }
         } else {
             if (!currentNode.left) {
                 currentNode.left = node;
             } else {
-                this.insert(val, currentNode.left)
+                return this.insert(val, currentNode.left)
             }
         }
     }
 
     find(val, currentNode=this.root) {
+        if (!currentNode) return;
         if (val === currentNode.val) {
             return currentNode;
         }
@@ -54,6 +55,16 @@ class BST {
         }
 
     }
+
+    validate(root = this.root, min=Number.MIN_VALUE, max=Number.MAX_VALUE) {
+        if (!root) return true;
+
+        if ((root.val < max) && (root.val > min) && this.validate(root.left, min, root.val) && this.validate(root.right, root.val, max)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 let bst = new BST();
@@ -66,8 +77,10 @@ let n3 = new Node(3);
 let n4 = new Node(12);
 
 bst.insert(n2);
-bst.insert(n3);
-bst.insert(n4);
+// bst.insert(n3);
+// bst.insert(n4);
 
 
 console.log(bst.find(10))
+
+console.log(bst.validate())

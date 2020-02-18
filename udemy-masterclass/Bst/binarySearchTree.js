@@ -65,22 +65,54 @@ class BST {
             return false;
         }
     }
+
+    bfs() {
+        let queue = [];
+        let result = [];
+        let firstItem = this.root;
+
+        queue.push(firstItem)
+
+        while(queue.length) {
+            firstItem = queue.shift();
+            result.push(firstItem);
+            if (firstItem.left) {queue.push(firstItem.left)}
+            if (firstItem.right) {queue.push(firstItem.right)}
+        }
+
+        return result;
+    }
+
+    dfsPreorder() {
+        let data = []
+        let current = this.root;
+
+        function traverse(node) {
+            data.push(node.val)
+            if (node.left) {traverse(node.left)};
+            if (node.right) {traverse(node.right)};
+        }
+
+        traverse(current);
+
+        return data;
+    }
 }
 
 let bst = new BST();
 let n1 = new Node(10)
-
-bst.root = n1;
-
 let n2 = new Node(6);
 let n3 = new Node(3);
 let n4 = new Node(12);
 
-bst.insert(n2);
-// bst.insert(n3);
-// bst.insert(n4);
+bst.insert(10);
+bst.insert(6);
+bst.insert(15);
+bst.insert(3);
+bst.insert(8);
+bst.insert(20);
 
 
-console.log(bst.find(10))
+console.log(bst.validate(10))
 
-console.log(bst.validate())
+console.log(bst.dfsPreorder())

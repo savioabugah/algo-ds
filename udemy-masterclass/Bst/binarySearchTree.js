@@ -11,7 +11,7 @@ class BST {
         this.root = null;
     }
 
-    insert(val, currentNode=this.root) {
+    insert(val, currentNode = this.root) {
         const node = new Node(val);
         if (!currentNode) {
             this.root = node;
@@ -35,7 +35,7 @@ class BST {
         }
     }
 
-    find(val, currentNode=this.root) {
+    find(val, currentNode = this.root) {
         if (!currentNode) return;
         if (val === currentNode.val) {
             return currentNode;
@@ -56,7 +56,7 @@ class BST {
 
     }
 
-    validate(root = this.root, min=Number.MIN_VALUE, max=Number.MAX_VALUE) {
+    validate(root = this.root, min = Number.MIN_VALUE, max = Number.MAX_VALUE) {
         if (!root) return true;
 
         if ((root.val < max) && (root.val > min) && this.validate(root.left, min, root.val) && this.validate(root.right, root.val, max)) {
@@ -73,11 +73,15 @@ class BST {
 
         queue.push(firstItem)
 
-        while(queue.length) {
+        while (queue.length) {
             firstItem = queue.shift();
             result.push(firstItem);
-            if (firstItem.left) {queue.push(firstItem.left)}
-            if (firstItem.right) {queue.push(firstItem.right)}
+            if (firstItem.left) {
+                queue.push(firstItem.left)
+            }
+            if (firstItem.right) {
+                queue.push(firstItem.right)
+            }
         }
 
         return result;
@@ -89,13 +93,53 @@ class BST {
 
         function traverse(node) {
             data.push(node.val)
-            if (node.left) {traverse(node.left)};
-            if (node.right) {traverse(node.right)};
+            if (node.left) {
+                traverse(node.left)
+            };
+            if (node.right) {
+                traverse(node.right)
+            };
         }
 
         traverse(current);
 
         return data;
+    }
+
+    dfsInorder() {
+        let result = []
+
+        function traverse(current) {
+            if (current.left) {
+                traverse(current.left)
+            };
+            result.push(current.val);
+            if (current.right) {
+                traverse(current.right)
+            };
+        }
+
+        traverse(root);
+
+        return result;
+    }
+
+    dfsPostorder() {
+        let result = [];
+
+        function traverse(current) {
+            if (current.left) {
+                traverse(current.left);
+            }
+            if (current.right) {
+                traverse(current.right);
+            }
+            result.push(current.val)
+        }
+
+        traverse(this.root)
+
+        return result;
     }
 }
 
